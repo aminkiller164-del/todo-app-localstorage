@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App - Gestionnaire de Tâches</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="app-logo">📝 TodoApp</h1>
+                <p class="app-subtitle">Organisez vos tâches</p>
+            </div>
+
+            <nav class="categories-nav">
+                <h3 class="nav-title">Catégories</h3>
+                <ul class="categories-list" id="categoriesList">
+                    <li class="category-item active" data-category="all">
+                        <span class="category-icon">📋</span>
+                        <span class="category-name">Toutes les tâches</span>
+                        <span class="category-count">0</span>
+                    </li>
+                    <li class="category-item" data-category="work">
+                        <span class="category-icon">💼</span>
+                        <span class="category-name">Travail</span>
+                        <span class="category-count">0</span>
+                    </li>
+                    <li class="category-item" data-category="personal">
+                        <span class="category-icon">🏠</span>
+                        <span class="category-name">Personnes</span>
+                        <span class="category-count">0</span>
+                    </li>
+                    <li class="category-item" data-category="shopping">
+                        <span class="category-icon">🛒</span>
+                        <span class="category-name">Courses</span>
+                        <span class="category-count">0</span>
+                    </li>
+                    <li class="category-item" data-category="health">
+                        <span class="category-icon">💪</span>
+                        <span class="category-name">Santé</span>
+                        <span class="category-count">0</span>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button class="btn-clear-all" id="clearAllBtn">🗑️ Effacer tout</button>
+                <button class="btn-export" id="exportBtn">📥 Exporter</button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div class="header-left">
+                    <h2 class="header-title" id="headerTitle">Toutes les tâches</h2>
+                    <p class="header-subtitle" id="headerSubtitle">Vous avez 0 tâche(s)</p>
+                </div>
+                <div class="header-right">
+                    <input type="text" class="search-input" id="searchInput" placeholder="🔍 Rechercher...">
+                </div>
+            </header>
+
+            <!-- Add Task Section -->
+            <section class="add-task-section">
+                <div class="add-task-container">
+                    <input 
+                        type="text" 
+                        class="task-input" 
+                        id="taskInput" 
+                        placeholder="Ajoutez une nouvelle tâche..."
+                    >
+                    <select class="task-category" id="taskCategory">
+                        <option value="work">💼 Travail</option>
+                        <option value="personal">🏠 Personnes</option>
+                        <option value="shopping">🛒 Courses</option>
+                        <option value="health">💪 Santé</option>
+                    </select>
+                    <select class="task-priority" id="taskPriority">
+                        <option value="low">🟢 Faible</option>
+                        <option value="medium">🟡 Moyen</option>
+                        <option value="high">🔴 Élevée</option>
+                    </select>
+                    <button class="btn-add-task" id="addTaskBtn">Ajouter</button>
+                </div>
+            </section>
+
+            <!-- Stats Section -->
+            <section class="stats-section">
+                <div class="stat-card">
+                    <span class="stat-icon">📊</span>
+                    <div class="stat-info">
+                        <p class="stat-label">Total</p>
+                        <p class="stat-value" id="statTotal">0</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-icon">✅</span>
+                    <div class="stat-info">
+                        <p class="stat-label">Complétées</p>
+                        <p class="stat-value" id="statCompleted">0</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-icon">⏳</span>
+                    <div class="stat-info">
+                        <p class="stat-label">En attente</p>
+                        <p class="stat-value" id="statPending">0</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-icon">🔥</span>
+                    <div class="stat-info">
+                        <p class="stat-label">Prioritaires</p>
+                        <p class="stat-value" id="statHigh">0</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tasks List -->
+            <section class="tasks-section">
+                <div class="tasks-filters">
+                    <button class="filter-btn active" data-filter="all">Toutes</button>
+                    <button class="filter-btn" data-filter="completed">Complétées</button>
+                    <button class="filter-btn" data-filter="pending">En attente</button>
+                    <select class="sort-select" id="sortSelect">
+                        <option value="date-desc">📅 Plus récentes</option>
+                        <option value="date-asc">📅 Plus anciennes</option>
+                        <option value="priority">🔥 Par priorité</option>
+                        <option value="name">🔤 Par nom</option>
+                    </select>
+                </div>
+
+                <div class="tasks-list" id="tasksList">
+                    <div class="empty-state">
+                        <div class="empty-icon">🎯</div>
+                        <h3>Aucune tâche</h3>
+                        <p>Commencez par ajouter une nouvelle tâche</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal pour éditer -->
+    <div class="modal" id="editModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Éditer la tâche</h3>
+                <button class="btn-close" id="closeModalBtn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <input type="text" class="modal-input" id="editTaskInput" placeholder="Texte de la tâche">
+                <select class="modal-select" id="editTaskCategory">
+                    <option value="work">💼 Travail</option>
+                    <option value="personal">🏠 Personnes</option>
+                    <option value="shopping">🛒 Courses</option>
+                    <option value="health">💪 Santé</option>
+                </select>
+                <select class="modal-select" id="editTaskPriority">
+                    <option value="low">🟢 Faible</option>
+                    <option value="medium">🟡 Moyen</option>
+                    <option value="high">🔴 Élevée</option>
+                </select>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-cancel" id="cancelEditBtn">Annuler</button>
+                <button class="btn-save" id="saveEditBtn">Enregistrer</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
